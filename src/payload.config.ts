@@ -17,10 +17,43 @@ import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
 
+import { en } from '@payloadcms/translations/languages/en'
+import { hr } from '@payloadcms/translations/languages/hr'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+
+  i18n: {
+    supportedLanguages: { en, hr },
+    fallbackLanguage: 'en' // default
+  },
+
+  localization: {
+    locales: [
+      {
+        label: {
+          en: 'English',
+          hr: 'Engleski'
+        },
+        code: 'en',
+      },
+      {
+        label: {
+          en: 'Croatian',
+          hr: 'Hrvatski'
+        },
+        code: 'hr',
+        fallbackLocale: 'en',
+
+        //rtl: true, // for languages that are written right-to-left such as arabic
+      },
+    ],
+    defaultLocale: 'en', // required
+    fallback: true, // defaults to true
+  },
+
   admin: {
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
